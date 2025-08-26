@@ -12,7 +12,15 @@
         <a href={% url "listado_autos" %}>Autos</a>
     </nav>
 
-<h1>HOLA SOY MI PRIMERA VISTA</h1>
-    
+    <h1>Formulario de creacion</h1>
+
+    <form action={% url "crear_auto" %} method="POST">
+        {% csrf_token %}
+
+        {{formulario}}
+
+        <input type="submit" value="Crear">
+        {% comment %} <button>Crear</button> {% endcomment %}
+    </form>
 </body>
 </html>
