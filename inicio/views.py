@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from inicio.models import Auto
 from inicio.forms import FormularioCreacionAuto
+from django.views.generic.edit import UpdateView, DeleteView
+from django.urls import reverse_lazy
 
 def inicio(request):
     
@@ -43,3 +45,26 @@ def listado_autos(request):
     autos = Auto.objects.all()
     
     return render(request, 'inicio/listado_autos.html', {'listado_de_autos': autos})
+
+def detalle_auto(request, auto_id):
+    
+    auto = Auto.objects.get(id=auto_id)
+    
+    return render(request, 'inicio/detalle_auto.html', {'auto': auto})
+
+# def actualizar_auto(request, auto_id):
+    
+#     ...
+
+class ActualizarAuto(UpdateView):
+    model = Auto
+    template_name = "inicio/actualizar_auto.html"
+    # fields = ['marca', 'modelo']
+    fields = "__all__"
+    success_url = reverse_lazy('listado_autos')
+    
+class EliminarAuto(DeleteView):
+    model = Auto
+    template_name = "inicio/eliminar_auto.html"
+    success_url = reverse_lazy('listado_autos')
+

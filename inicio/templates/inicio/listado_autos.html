@@ -1,27 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <nav>
-        <a href={% url "inicio" %}>Inicio</a>
-        <a href={% url "crear_auto" %}>Crear Auto</a>
-        <a href={% url "listado_autos" %}>Autos</a>
-    </nav>
+{% extends "base.html" %}
 
+{% block contenido %}
     <h1>Listado de autos</h1>
 
+    <a href={% url "crear_auto" %}>Crear Auto</a>
     <ul>
         {% for auto in listado_de_autos %}
         <li>
             {{auto}}
+            | <a href={% url "detalle_auto" auto.id %}>Detalle</a>
+            | <a href={% url "actualizar_auto" auto.id %}>Actualizar</a>
+            | <a href={% url "eliminar_auto" auto.id %}>Eliminar</a>
         </li>
         {% endfor %}
     </ul>
 
+{% endblock contenido %}
 
-</body>
-</html>

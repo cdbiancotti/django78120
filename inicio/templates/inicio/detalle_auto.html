@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+    <h1>Detalle del auto {{auto.id}}</h1>
+    
+    <ul>
+        <li>
+            Marca: {{auto.marca}}
+        </li>
+        <li>
+            Modelo: {{auto.modelo}}
+        </li>
+    </ul>
+
+{% endblock contenido %}
+

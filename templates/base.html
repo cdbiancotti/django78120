@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <nav>
+        <a href={% url "inicio" %}>Inicio</a>
+        <a href={% url "listado_autos" %}>Autos</a>
+
+        {% if request.user.is_authenticated %}
+        <form action={% url "cerrar_sesion" %} method="post">
+            {% csrf_token %}
+            <input type="submit" value="Cerrar sesion">
+        </form>
+        {% else %}
+        <a href={% url "iniciar_sesion" %}>Iniciar Sesion</a>
+        {% endif %}
+    </nav>
+
+    {% block contenido %}
+    texto a reemplazar
+    {% endblock contenido %}
+    
+</body>
+</html>

@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 
 {% block contenido %}
-    <h1>Formulario de creacion</h1>
+    <h1>Actualizar auto {{auto.id}}</h1>
 
-    <form action={% url "crear_auto" %} method="POST">
+    <form action={% url "actualizar_auto" auto.id %} method="POST">
         {% csrf_token %}
 
-        {{formulario}}
+        {{form}}
 
-        <input type="submit" value="Crear">
+        <input type="submit" value="Actualizar">
         {% comment %} <button>Crear</button> {% endcomment %}
     </form>
 {% endblock contenido %}
