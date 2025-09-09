@@ -3,7 +3,7 @@
 {% block contenido %}
     <h1>Formulario de creacion</h1>
 
-    <form action={% url "crear_auto" %} method="POST">
+    <form action={% url "crear_auto" %} method="POST" enctype="multipart/form-data">
         {% csrf_token %}
 
         {{formulario}}

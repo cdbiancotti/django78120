@@ -4,6 +4,8 @@ from inicio.models import Auto
 from inicio.forms import FormularioCreacionAuto
 from django.views.generic.edit import UpdateView, DeleteView
 from django.urls import reverse_lazy
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 def inicio(request):
     
@@ -18,19 +20,20 @@ def inicio(request):
     
 #     return render(request, 'inicio/crear_auto_v1.html')
 
-
+@login_required
 def crear_auto_v2(request):
     
     # print(request.GET)
     # print(request.POST)
     
     if request.method == "POST":
-        formulario = FormularioCreacionAuto(request.POST)
+        formulario = FormularioCreacionAuto(request.POST, request.FILES)
         if formulario.is_valid():
             marca_nueva = formulario.cleaned_data.get('marca')
             modelo_nueva = formulario.cleaned_data.get('modelo')
+            imagen_nueva = formulario.cleaned_data.get('imagen')
             
-            auto = Auto(marca=marca_nueva, modelo=modelo_nueva)
+            auto = Auto(marca=marca_nueva, modelo=modelo_nueva, imagen=imagen_nueva)
             auto.save()
             
             return redirect("listado_autos")
@@ -56,14 +59,14 @@ def detalle_auto(request, auto_id):
     
 #     ...
 
-class ActualizarAuto(UpdateView):
+class ActualizarAuto(LoginRequiredMixin, UpdateView):
     model = Auto
     template_name = "inicio/actualizar_auto.html"
     # fields = ['marca', 'modelo']
     fields = "__all__"
     success_url = reverse_lazy('listado_autos')
     
-class EliminarAuto(DeleteView):
+class EliminarAuto(LoginRequiredMixin, DeleteView):
     model = Auto
     template_name = "inicio/eliminar_auto.html"
     success_url = reverse_lazy('listado_autos')

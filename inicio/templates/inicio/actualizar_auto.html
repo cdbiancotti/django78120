@@ -3,7 +3,7 @@
 {% block contenido %}
     <h1>Actualizar auto {{auto.id}}</h1>
 
-    <form action={% url "actualizar_auto" auto.id %} method="POST">
+    <form action={% url "actualizar_auto" auto.id %} method="POST" enctype="multipart/form-data">
         {% csrf_token %}
 
         {{form}}

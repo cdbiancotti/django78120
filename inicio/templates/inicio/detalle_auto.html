@@ -10,6 +10,11 @@
         <li>
             Modelo: {{auto.modelo}}
         </li>
+        <li>
+            Imagen: 
+            {% if auto.imagen %}
+            <img src={{auto.imagen.url}} alt="Imagen del Auto" height="300px">
+            {% endif %}
     </ul>
 
 {% endblock contenido %}

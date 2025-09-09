@@ -3,6 +3,7 @@ from django.db import models
 class Auto(models.Model):
     marca = models.CharField(max_length=20)
     modelo = models.CharField(max_length=20)
+    imagen = models.ImageField(upload_to='autos', null=True)
     
     # def __repl__(self):
     def __str__(self):
